@@ -30,24 +30,24 @@ class Api {
       .then(res => this._getResponse(res));
     }
 
-    changeAvatar(data) {
+    setUserAvatar(data) {
       return fetch(`${this._url}/users/me/avatar`, {
         method: "PATCH",
         headers: this._headers,
         body: JSON.stringify({
-          avatar: data.avatar
+          avatar: data
         }),
       })
       .then(this._getResponse);
     }
 
-    editUserInfo(data) {
+    setUserInfo(name, about) {
       return fetch(`${this._url}/users/me`, {
         method: "PATCH",
         headers: this._headers,
         body: JSON.stringify({
-          name: data.name,
-          about: data.about
+          name: name,
+          about: about
         }),
 
       })
@@ -66,26 +66,17 @@ class Api {
       .then(this._getResponse);
     }
 
-
-    deleteLike(cardId) {
-      return fetch(`${this._url}/cards/${cardId}/likes`, {
+    deleteCard(cardId) {
+      return fetch(`${this._url}/cards/${cardId}`, {
         method: 'DELETE',
         headers: this._headers
       })
       .then(this._getResponse);
     }
 
-  putLike(cardId) {
-    return fetch(`${this._url}/cards/${cardId}/likes`, {
-      method: 'PUT',
-      headers: this._headers
-    })
-    .then(this._getResponse);
-  }
-
-    deleteCard(cardId) {
-      return fetch(`${this._url}/cards/${cardId}`, {
-        method: 'DELETE',
+    changeLikeCardStatus(cardId, isLiked) {
+      return fetch(`${this._url}/cards/${cardId}/likes`, {
+        method: `${isLiked ? 'PUT' : 'DELETE'}`,
         headers: this._headers
       })
       .then(this._getResponse);

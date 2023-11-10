@@ -7,6 +7,6 @@ function Header() {
             <img src={logo} alt="место" className="header__logo" />
         </header>
         )
-}
+};
 
 export default Header;
